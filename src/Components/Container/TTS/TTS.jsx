@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import './tts.css';
 
 const Wrapper = styled(Box)`
-    background-color: pink;
+    /* background-color: pink; */
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -17,7 +17,8 @@ export default function TTS() {
             <audio
                 controls
                 source
-                src="https://d2zn4hspiuleph.cloudfront.net/media-content/TEST_UID/ssml_text_and_image.mp3"
+                // src="https://d2zn4hspiuleph.cloudfront.net/media-content/TEST_UID/ssml_text_and_image.mp3"
+                src="ivc-demo.mp3"
                 type="audio/ogg"
                 autoPlay
             ></audio>

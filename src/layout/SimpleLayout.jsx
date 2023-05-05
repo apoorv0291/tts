@@ -9,7 +9,7 @@ const FullDiv = styled(Box)`
     justify-content: center;
     margin: auto;
     position: relative;
-    background-color: pink;
+    /* background-color: pink; */
     height: 800px;
 `;
 
