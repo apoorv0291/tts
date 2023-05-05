@@ -33,6 +33,10 @@ export default function TTS() {
             <h2 id="hakra-pottery-and-related-artifacts">
                 Hakra pottery and related artifacts
             </h2>
+            <img
+                src="Hakra_Pottery.png"
+                alt="Screenshot 2023-05-05 at 2.44.56 PM.png"
+            />
             <ul>
                 <li>
                     Hakra pottery was produced during the early phase of
@@ -47,12 +51,6 @@ export default function TTS() {
                     Rakhigarhi.
                 </li>
             </ul>
-            <p>
-                <img
-                    src="Hakra_Pottery.png"
-                    alt="Screenshot 2023-05-05 at 2.44.56 PM.png"
-                />
-            </p>
             <ul>
                 <li>
                     Evidence of stone, wheat, bone, and shell working, as well
