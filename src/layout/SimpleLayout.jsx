@@ -11,6 +11,7 @@ const FullDiv = styled(Box)`
     position: relative;
     /* background-color: pink; */
     height: 800px;
+    position: relative;
 `;
 
 export default function SimpleLayout({ children }) {
