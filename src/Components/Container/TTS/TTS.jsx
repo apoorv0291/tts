@@ -5,6 +5,10 @@ import './tts.css';
 
 const Wrapper = styled(Box)`
     background-color: pink;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 16px;
 `;
 
 export default function TTS() {
