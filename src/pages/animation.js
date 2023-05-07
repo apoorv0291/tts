@@ -61,7 +61,9 @@ export default function Animation() {
         console.log('nodes', nodes);
         let spanNodes = [];
         for (let i = 0; i < nodes.length; i += 1) {
-            let headingNodes = document.createElement('h1');
+            console.log('NODE NODE::', nodes[i]);
+            console.log('NODE NODE::', nodes[i].tagName);
+            let headingNodes = document.createElement(nodes[i].tagName);
             console.log('dd0', nodes[i].innerText);
             const splitText = nodes[i].innerText.split(' ');
             console.log('Split text', splitText);
@@ -83,6 +85,7 @@ export default function Animation() {
 
         console.log('span ndoes', spanNodes);
         let totalNodes = 0;
+        let delay = 0;
         for (let node = 0; node < spanNodes.length; node += 1) {
             let current = spanNodes[node];
             // console.log('current chidl', current.childNodes);
@@ -95,11 +98,10 @@ export default function Animation() {
             ) {
                 console.log('churrent chuld node', childrent[currentSpan]);
                 childrent[currentSpan].style = `animation: bringText ${
-                    totalNodes * 0.3
-                }s ease ${
-                    totalNodes * 0.3
-                }s forwards; animation-name:bringText;`;
+                    (totalNodes + 1) * 0.3
+                }s ease ${delay}s forwards; animation-name:bringText;`;
                 totalNodes += 1;
+                delay = (totalNodes + 1) * 0.3;
             }
 
             console.log('current', current);
@@ -135,10 +137,12 @@ export default function Animation() {
                 {/* <StyledChild className="child">Child</StyledChild> */}
             {/* </StyledParent> */}
             <h1 className="heading">tis is a heading</h1>
-            <h2 className="heading">Thisi is a second heading</h2>
-            <h2 className="heading">Thisi is a second heading</h2>
-            <h2 className="heading">Thisi is a second heading</h2>
-            <h2 className="heading">Thisi is a fourth heading</h2>
+            <h2 className="heading">Thisi is a h2 heading</h2>
+            <h3 className="heading">Thisi is a h3 heading</h3>
+            <h4 className="heading">Thisi is a h4 heading</h4>
+            <h5 className="heading">Thisi is a h5 heading</h5>
+            <h6 className="heading">Thisi is a h6 heading</h6>
+            <p className="heading">Thisi is a p tag</p>
             {/* <p className="animate">Thisi is a second heading</p> */}
             <div id="text"></div>
         </div>
