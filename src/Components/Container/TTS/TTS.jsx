@@ -25,45 +25,145 @@ const Overlay = styled(Box)`
 `;
 
 // let i = 0
-const startAnimating = (elemId) => {
-    let arr = [];
-    for (let y = 0; y < elemId.length; y += 1) {
-        const words = document.getElementById(elemId[y]).childNodes;
-        arr = [...arr, ...words];
-    }
+// const startAnimating = (elemId) => {
+//     let arr = [];
+//     for (let y = 0; y < elemId.length; y += 1) {
+//         const words = document.getElementById(elemId[y]).childNodes;
+//         arr = [...arr, ...words];
+//     }
 
-    console.log('words', arr);
-    for (let i = 0; i < arr.length; i += 1) {
-        const word = arr[i];
-        word.style =
-            'animation: fadeIn ease-out 1s both; animation-delay: ' +
-            i * 0.2 +
-            's';
-        // console.log(word);
+//     console.log('words', arr);
+//     for (let i = 0; i < arr.length; i += 1) {
+//         const word = arr[i];
+//         word.style =
+//             'animation: fadeIn ease-out 1s both; animation-delay: ' +
+//             i * 0.2 +
+//             's';
+//         // console.log(word);
+//     }
+// };
+
+const startAnimation = () => {
+    let nodes = document.getElementsByClassName('heading');
+    console.log('nodes', nodes);
+    console.log('nodes', nodes);
+    let spanNodes = [];
+    for (let i = 0; i < nodes.length; i += 1) {
+        debugger;
+        console.log('NODE NODE::', nodes[i]);
+        console.log('NODE NODE::', nodes[i].tagName);
+        console.log('NODE NODE::aat', nodes[i].attributes);
+
+        let headingNodes = document.createElement(nodes[i].tagName);
+        // let headingNodes = null;
+        console.log(
+            'nodes[i].getAttributeNames()',
+            nodes[i].getAttributeNames()
+        );
+        const attrs = nodes[i].getAttributeNames().reduce((acc, name) => {
+            return { ...acc, [name]: nodes[i].getAttribute(name) };
+        }, {});
+        console.log('attrs', attrs);
+
+        console.log('headingNodes', headingNodes);
+        headingNodes = visitChildren(nodes[i], true);
+        for (var key in attrs) {
+            console.log('keyattrs', key, attrs[key]);
+            headingNodes.setAttribute(key, attrs[key]);
+        }
+        headingNodes.setAttribute(
+            'style',
+            headingNodes.getAttribute('style') + ';opacity:1;'
+        );
+        debugger;
+        spanNodes.push(headingNodes);
+    }
+    console.log('span nodes', spanNodes);
+    const recursiveDIV = document.getElementById('recursion');
+    console.log('recursive div', recursiveDIV);
+    debugger;
+    for (let node = 0; node < spanNodes.length; node += 1) {
+        debugger;
+        recursiveDIV.appendChild(spanNodes[node]);
     }
 };
+let newTotalNodes = 0;
+let newDelay = 0;
+let animationDuration = 0.58;
+function visitChildren(el, recursive) {
+    if (!el) {
+        return null;
+    }
+    if (el.children.length === 0) {
+        debugger;
+        const ele = document.createElement(el.tagName);
+        const splitText = el.innerText.split(' ');
+        console.log('Split text', splitText);
+        // ele.style = 'opacity:1';
+        ele.style = `animation: changeOpactiyTo1 ${
+            (newTotalNodes + 1) * 0.3
+        }s ease ${newDelay}s forwards; animation-name:changeOpactiyTo1;`;
+        for (
+            let splitWords = 0;
+            splitWords < splitText.length;
+            splitWords += 1
+        ) {
+            const spanNode = document.createElement('span');
+            const text = document.createTextNode(splitText[splitWords] + ' ');
+            spanNode.appendChild(text);
+            // console.log('span node', spanNode);
+            spanNode.style = `animation: bringText ${animationDuration}s ease ${newDelay}s forwards; animation-name:bringText;`;
+            newTotalNodes += 1;
+            newDelay = (newTotalNodes + 1) * animationDuration;
+            ele.appendChild(spanNode);
+            console.log('ELE node', ele);
+            debugger;
+            // spanNodes.push(spanNode);
+        }
+        return ele;
+    }
+    const ele = document.createElement(el.tagName);
+    let parentDelay = newDelay;
+    let parentNodeTime = newTotalNodes;
+    for (var i = 0; i < el.children.length; i += 1) {
+        debugger;
+        console.log('child', el.children[i]);
+        if (recursive) {
+            const element = visitChildren(el.children[i], recursive);
+            debugger;
+            ele.appendChild(element);
+        }
+        debugger;
+    }
+    ele.style = `animation: changeOpactiyTo1 ${animationDuration}s ease ${parentDelay}s forwards; animation-name:changeOpactiyTo1;`;
+    newTotalNodes += 1;
+    newDelay = (newTotalNodes + 1) * animationDuration;
+
+    return ele;
+}
 
 export default function TTS() {
     const [isPlaying, setPlaying] = useState(null);
     const ref = useRef();
     const playAudio = () => {
-        // debugger;
+        debugger;
         // document.getElementById('main-container').style.filter = 'unset';
+        if (!isPlaying) ref.current.play();
+        else ref.current.pause();
         ref.current.play();
-        setPlaying(true);
-        startAnimating([
-            'indus-valley-civilization-chronology',
-            'hakra-pottery-and-related-artifacts',
-            '33',
-            '44',
-            '55',
-        ]);
+        setPlaying(!isPlaying);
+        // startAnimating([
+        //     'indus-valley-civilization-chronology',
+        //     'hakra-pottery-and-related-artifacts',
+        //     '33',
+        // ]);
+        startAnimation();
         // startAnimating('hakra-pottery-and-related-artifacts');
     };
     return (
         <>
             {!isPlaying && (
-                <Overlay onClick={playAudio}>
+                <Overlay onClick={playAudio} className="overlay">
                     <FaPlay size="56px" color="white" />
                 </Overlay>
             )}
@@ -85,46 +185,39 @@ export default function TTS() {
             </audio> */}
 
                 <div id="container">
-                    <h1 id="indus-valley-civilization-chronology">
-                        <span>Indus</span> <span>Valley</span>{' '}
-                        <span>Civilization</span> <span>- Chronology</span>
+                    <h1
+                        id="indus-valley-civilization-chronology"
+                        className="heading"
+                    >
+                        IndusValley Civilization - Chronology
                     </h1>
-                    <h2 id="hakra-pottery-and-related-artifacts">
-                        <span> Hakra</span> <span> pottery</span>{' '}
-                        <span> and </span> <span>related</span>{' '}
-                        <span>artifacts</span>
+                    <h2
+                        id="hakra-pottery-and-related-artifacts"
+                        className="heading"
+                    >
+                        Hakra pottery and related artifacts
                     </h2>
                     <img
                         src="Hakra_Pottery.png"
                         alt="Screenshot 2023-05-05 at 2.44.56 PM.png"
+                        className="images"
                     />
-                    <ul>
+                    <ul className="heading">
                         <li id="33">
-                            <span> Hakra</span> <span> pottery</span>{' '}
-                            <span>was </span>
-                            <span>produced </span> <span>during</span>{' '}
-                            <span>the </span>
-                            <span>early </span>
-                            <span>phase </span>
-                            <span>of</span> <span>Harappan Civilization</span>
+                            Hakra pottery was produced during the early phase of
+                            Harappan Civilization
                         </li>
-                        <li id="44">
-                            <span>It</span> <span>is characterized</span>
-                            <span> by its red</span>
-                            <span> slip and painted </span>{' '}
-                            <span>designs.</span>
+                        <li>
+                            It is characterized by its red slip and painted
+                            designs.
                         </li>
-                        <li id="55">
-                            <span> Hakra Pottery </span>
-                            <span>has been found at</span>{' '}
-                            <span>various Harappan sites,</span>
-                            <span> including Kunal, Dholavira,</span>{' '}
-                            <span>
-                                Bhirrana, Girwas, Farmana and Rakhigarhi.
-                            </span>
+                        <li>
+                            Hakra Pottery has been found at various Harappan
+                            sites, including Kunal, Dholavira, Bhirrana, Girwas,
+                            Farmana and Rakhigarhi.
                         </li>
                     </ul>
-                    <ul>
+                    <ul className="heading">
                         <li>
                             Evidence of stone, wheat, bone, and shell working,
                             as well as indirect knowledge of copper smelting
@@ -137,7 +230,7 @@ export default function TTS() {
                             Harappan people.
                         </li>
                     </ul>
-                    <Box bg="pink" p="4px">
+                    <Box bg="pink" p="4px" className="heading">
                         <aside>
                             💡 The presence of Hakra Pottery at different
                             Harappan sites indicates that there was a shared
@@ -145,7 +238,10 @@ export default function TTS() {
                         </aside>
                     </Box>
 
-                    <h2 id="the-late-harappan-phase-emergence-of-regional-culture">
+                    <h2
+                        id="the-late-harappan-phase-emergence-of-regional-culture"
+                        className="heading"
+                    >
                         The Late Harappan Phase -Emergence of Regional Culture
                     </h2>
                     <p>
@@ -154,7 +250,7 @@ export default function TTS() {
                             alt="Screenshot 2023-05-05 at 2.50.06 PM.png"
                         />
                     </p>
-                    <ul>
+                    <ul className="heading">
                         <li>
                             Migration led to the dispersal of Harappan culture
                             across regions.
@@ -186,14 +282,14 @@ export default function TTS() {
                             of that historical period.
                         </li>
                     </ul>
-                    <Box bg="pink" p="4px">
+                    <Box bg="pink" p="4px" className="heading">
                         <aside>
                             💡 The transition from urban centers to rural
                             settlements during the Late Harappan phase.
                         </aside>
                     </Box>
 
-                    <Box bg="pink" p="4px">
+                    <Box bg="pink" p="4px" className="heading">
                         <aside>
                             💡
                             <ol>
@@ -217,14 +313,16 @@ export default function TTS() {
                         </aside>
                     </Box>
 
-                    <h2 id="conclusion">Conclusion</h2>
-                    <p>
+                    <h2 id="conclusion" className="heading">
+                        Conclusion
+                    </h2>
+                    <p className="heading">
                         <img
                             src="Conclusion.png"
                             alt="Screenshot 2023-05-05 at 2.58.09 PM.png"
                         />
                     </p>
-                    <ul>
+                    <ul className="heading">
                         <li>
                             The civilization offers invaluable insights into
                             ancient urban life.
@@ -246,7 +344,7 @@ export default function TTS() {
                             City projects.
                         </li>
                     </ul>
-                    <aside>
+                    <aside className="heading">
                         💡
                         <ol>
                             <li>
@@ -266,6 +364,7 @@ export default function TTS() {
                         </ol>
                     </aside>
                 </div>
+                <div id="recursion"></div>
             </Wrapper>
         </>
     );

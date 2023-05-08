@@ -174,34 +174,6 @@ export default function Animation() {
             debugger;
             recursiveDIV.appendChild(spanNodes[node]);
         }
-
-        // console.log('span ndoes', spanNodes);
-        // let totalNodes = 0;
-        // let delay = 0;
-        // for (let node = 0; node < spanNodes.length; node += 1) {
-        //     let current = spanNodes[node];
-        //     // console.log('current chidl', current.childNodes);
-        //     const childrent = current.children;
-        //     // console.log('Children', childrent);
-        //     for (
-        //         let currentSpan = 0;
-        //         currentSpan < childrent.length;
-        //         currentSpan += 1
-        //     ) {
-        //         console.log('churrent chuld node', childrent[currentSpan]);
-        //         childrent[currentSpan].style = `animation: bringText ${
-        //             (totalNodes + 1) * 0.3
-        //         }s ease ${delay}s forwards; animation-name:bringText;`;
-        //         totalNodes += 1;
-        //         delay = (totalNodes + 1) * 0.3;
-        //     }
-
-        //     console.log('current', current);
-        // }
-        // // console.log("")
-        // for (let node = 0; node < spanNodes.length; node += 1) {
-        //     document.getElementById('text').appendChild(spanNodes[node]);
-        // }
     };
     let newTotalNodes = 0;
     let newDelay = 0;
