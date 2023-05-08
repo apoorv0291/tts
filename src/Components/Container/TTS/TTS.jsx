@@ -89,7 +89,7 @@ const startAnimation = () => {
 };
 let newTotalNodes = 0;
 let newDelay = 0;
-let animationDuration = 0.58;
+let animationDuration = 0.55;
 function visitChildren(el, recursive) {
     if (!el) {
         return null;
