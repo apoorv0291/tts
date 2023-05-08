@@ -215,6 +215,9 @@ export default function Animation() {
             const splitText = el.innerText.split(' ');
             console.log('Split text', splitText);
             // ele.style = 'opacity:1';
+            ele.style = `animation: changeOpactiyTo1 ${
+                (newTotalNodes + 1) * 0.3
+            }s ease ${newDelay}s forwards; animation-name:changeOpactiyTo1;`;
             for (
                 let splitWords = 0;
                 splitWords < splitText.length;

@@ -156,7 +156,7 @@ animation-play-state: paused;
     }
 }
 
-h1, h2,h3,h4,h5,h6, span, p ,ul{
+h1, h2,h3,h4,h5,h6, span, p ,ul, li{
     opacity: 0;
 }
 
@@ -171,5 +171,11 @@ h1, h2,h3,h4,h5,h6, span, p ,ul{
         /* transform: scale(.4, .4); */
         /* transform: translate(100px); */
         color: red;
+    }
+}
+
+@keyframes changeOpactiyTo1 {
+    100%{
+        opacity: 1;
     }
 }
