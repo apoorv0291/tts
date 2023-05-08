@@ -265,7 +265,6 @@ export default function Animation() {
     return (
         // <div onClick={startAnimation}>
         <div>
-            animation
             {/* <StyledBox
                 w="100px"
                 height="300px"
@@ -289,7 +288,7 @@ export default function Animation() {
                 {/* <StyledChild className="child">Child</StyledChild> */}
             {/* </StyledParent> */}
             <h1 className="heading" style={{ background: 'green' }}>
-                tis is a devesh heading
+                tis is a heading
             </h1>
             <h1 className="heading">tis is a heading</h1>
             <h2 className="heading">Thisi is a h2 heading</h2>
