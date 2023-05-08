@@ -224,7 +224,9 @@ export default function Animation() {
                 splitWords += 1
             ) {
                 const spanNode = document.createElement('span');
-                const text = document.createTextNode(splitText[splitWords]);
+                const text = document.createTextNode(
+                    splitText[splitWords] + ' '
+                );
                 spanNode.appendChild(text);
                 // console.log('span node', spanNode);
                 spanNode.style = `animation: bringText ${
