@@ -50,10 +50,10 @@ const startAnimation = () => {
     let spanNodes = [];
     for (let i = 0; i < nodes.length; i += 1) {
         debugger;
-        console.log('NODE NODE::', nodes[i]);
-        console.log('NODE NODE::', nodes[i].tagName);
-        console.log('NODE NODE::aat', nodes[i].attributes);
-
+        // console.log('NODE NODE::', nodes[i]);
+        console.log('NODE NODE::tagname', nodes[i].tagName);
+        // console.log('NODE NODE::aat', nodes[i].attributes);
+        // if ()
         let headingNodes = document.createElement(nodes[i].tagName);
         // let headingNodes = null;
         console.log(
@@ -71,10 +71,7 @@ const startAnimation = () => {
             console.log('keyattrs', key, attrs[key]);
             headingNodes.setAttribute(key, attrs[key]);
         }
-        headingNodes.setAttribute(
-            'style',
-            headingNodes.getAttribute('style') + ';opacity:1;'
-        );
+        headingNodes.setAttribute('style', headingNodes.getAttribute('style'));
         debugger;
         spanNodes.push(headingNodes);
     }
@@ -89,20 +86,32 @@ const startAnimation = () => {
 };
 let newTotalNodes = 0;
 let newDelay = 0;
-let animationDuration = 0.55;
+let animationDuration = 0.53;
 function visitChildren(el, recursive) {
     if (!el) {
         return null;
     }
     if (el.children.length === 0) {
         debugger;
+        console.log('CHIDREN IMG::000', el.tagName, el.children);
+
         const ele = document.createElement(el.tagName);
-        const splitText = el.innerText.split(' ');
-        console.log('Split text', splitText);
+        let splitText = [];
+        if (el.innerText) {
+            splitText = el.innerText.split(' ');
+        }
+        console.log('HIDREN IMG::000:Split text', splitText);
+        console.log('HIDREN IMG::000:SplitinnerText', el.innerText);
         // ele.style = 'opacity:1';
-        ele.style = `animation: changeOpactiyTo1 ${
-            (newTotalNodes + 1) * 0.3
-        }s ease ${newDelay}s forwards; animation-name:changeOpactiyTo1;`;
+        if (el.tagName === 'IMG')
+            ele.style = `animation: changeOpactiyTo1 .1s ease ${newDelay}s forwards; animation-name:changeOpactiyTo1;`;
+        else
+            ele.style = `animation: changeOpactiyTo1 ${animationDuration}s ease ${newDelay}s forwards; animation-name:changeOpactiyTo1;`;
+        if (splitText.length === 0 && el.tagName === 'IMG') {
+            newTotalNodes += 1;
+            newDelay = (newTotalNodes + 1) * animationDuration;
+        }
+
         for (
             let splitWords = 0;
             splitWords < splitText.length;
@@ -120,9 +129,12 @@ function visitChildren(el, recursive) {
             debugger;
             // spanNodes.push(spanNode);
         }
+
         return ele;
     }
     const ele = document.createElement(el.tagName);
+    console.log('CHIDREN IMG', el.tagName, el.children);
+
     let parentDelay = newDelay;
     let parentNodeTime = newTotalNodes;
     for (var i = 0; i < el.children.length; i += 1) {
@@ -200,7 +212,7 @@ export default function TTS() {
                     <img
                         src="Hakra_Pottery.png"
                         alt="Screenshot 2023-05-05 at 2.44.56 PM.png"
-                        className="images"
+                        className="heading"
                     />
                     <ul className="heading">
                         <li id="33">
@@ -230,7 +242,7 @@ export default function TTS() {
                             Harappan people.
                         </li>
                     </ul>
-                    <Box bg="pink" p="4px" className="heading">
+                    <Box p="4px" className="heading">
                         <aside>
                             💡 The presence of Hakra Pottery at different
                             Harappan sites indicates that there was a shared
@@ -248,6 +260,7 @@ export default function TTS() {
                         <img
                             src="Late-Harappan.png"
                             alt="Screenshot 2023-05-05 at 2.50.06 PM.png"
+                            className="heading"
                         />
                     </p>
                     <ul className="heading">
@@ -282,14 +295,14 @@ export default function TTS() {
                             of that historical period.
                         </li>
                     </ul>
-                    <Box bg="pink" p="4px" className="heading">
+                    <Box p="4px" className="heading">
                         <aside>
                             💡 The transition from urban centers to rural
                             settlements during the Late Harappan phase.
                         </aside>
                     </Box>
 
-                    <Box bg="pink" p="4px" className="heading">
+                    <Box p="4px" className="heading">
                         <aside>
                             💡
                             <ol>
@@ -320,6 +333,7 @@ export default function TTS() {
                         <img
                             src="Conclusion.png"
                             alt="Screenshot 2023-05-05 at 2.58.09 PM.png"
+                            className="heading"
                         />
                     </p>
                     <ul className="heading">
