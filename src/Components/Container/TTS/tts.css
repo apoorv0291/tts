@@ -198,3 +198,37 @@ svg{
         opacity: 1;
     }
 }
+
+@keyframes callOutAnimation {
+  100%{
+      opacity: 1;
+      background-color: rgba(0, 0, 0, .5);
+      padding:16px;
+
+  }
+  0%{
+    opacity: 1;
+    background-color: rgba(0, 0, 0);
+    padding:16px;
+}
+}
+
+
+@keyframes imageAnimation {
+  100%{
+      opacity: 1;
+      transform :translateX(0);
+  }
+  50%{
+    opacity: .6;
+    transform :translateX(100vw);
+}
+25%{
+  opacity:.3;
+  transform :translateX(0);
+}
+  0%{
+    opacity: 0;
+    transform :translateX(-100px);
+}
+}

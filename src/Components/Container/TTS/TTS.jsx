@@ -49,7 +49,7 @@ const startAnimation = () => {
     console.log('nodes', nodes);
     let spanNodes = [];
     for (let i = 0; i < nodes.length; i += 1) {
-        debugger;
+        // debugger;
         // console.log('NODE NODE::', nodes[i]);
         console.log('NODE NODE::tagname', nodes[i].tagName);
         // console.log('NODE NODE::aat', nodes[i].attributes);
@@ -72,27 +72,27 @@ const startAnimation = () => {
             headingNodes.setAttribute(key, attrs[key]);
         }
         headingNodes.setAttribute('style', headingNodes.getAttribute('style'));
-        debugger;
+        // debugger;
         spanNodes.push(headingNodes);
     }
     console.log('span nodes', spanNodes);
     const recursiveDIV = document.getElementById('recursion');
     console.log('recursive div', recursiveDIV);
-    debugger;
+    // debugger;
     for (let node = 0; node < spanNodes.length; node += 1) {
-        debugger;
+        // debugger;
         recursiveDIV.appendChild(spanNodes[node]);
     }
 };
 let newTotalNodes = 0;
 let newDelay = 0;
-let animationDuration = 0.53;
+let animationDuration = 0.55;
 function visitChildren(el, recursive) {
     if (!el) {
         return null;
     }
     if (el.children.length === 0) {
-        debugger;
+        // debugger;
         console.log('CHIDREN IMG::000', el.tagName, el.children);
 
         const ele = document.createElement(el.tagName);
@@ -103,8 +103,11 @@ function visitChildren(el, recursive) {
         console.log('HIDREN IMG::000:Split text', splitText);
         console.log('HIDREN IMG::000:SplitinnerText', el.innerText);
         // ele.style = 'opacity:1';
-        if (el.tagName === 'IMG')
-            ele.style = `animation: changeOpactiyTo1 .1s ease ${newDelay}s forwards; animation-name:changeOpactiyTo1;`;
+        if (el.tagName === 'ASIDE') {
+            debugger;
+            ele.style = `animation: callOutAnimation ${animationDuration}s ease ${newDelay}s forwards; animation-name:callOutAnimation;`;
+        } else if (el.tagName === 'IMG')
+            ele.style = `animation: imageAnimation .1s ease ${newDelay}s forwards; animation-name:imageAnimation;`;
         else
             ele.style = `animation: changeOpactiyTo1 ${animationDuration}s ease ${newDelay}s forwards; animation-name:changeOpactiyTo1;`;
         if (splitText.length === 0 && el.tagName === 'IMG') {
@@ -126,28 +129,34 @@ function visitChildren(el, recursive) {
             newDelay = (newTotalNodes + 1) * animationDuration;
             ele.appendChild(spanNode);
             console.log('ELE node', ele);
-            debugger;
+            // debugger;
             // spanNodes.push(spanNode);
         }
 
         return ele;
     }
     const ele = document.createElement(el.tagName);
+    const tagName = el.tagName;
     console.log('CHIDREN IMG', el.tagName, el.children);
 
     let parentDelay = newDelay;
     let parentNodeTime = newTotalNodes;
     for (var i = 0; i < el.children.length; i += 1) {
-        debugger;
+        // debugger;
         console.log('child', el.children[i]);
         if (recursive) {
             const element = visitChildren(el.children[i], recursive);
-            debugger;
+            // debugger;
             ele.appendChild(element);
         }
-        debugger;
+        // debugger;
     }
-    ele.style = `animation: changeOpactiyTo1 ${animationDuration}s ease ${parentDelay}s forwards; animation-name:changeOpactiyTo1;`;
+    if (tagName === 'ASIDE') {
+        debugger;
+        ele.style = `animation: callOutAnimation ${animationDuration}s ease ${parentDelay}s forwards; animation-name:callOutAnimation;`;
+        debugger;
+    } else
+        ele.style = `animation: changeOpactiyTo1 ${animationDuration}s ease ${parentDelay}s forwards; animation-name:changeOpactiyTo1;`;
     newTotalNodes += 1;
     newDelay = (newTotalNodes + 1) * animationDuration;
 
@@ -158,7 +167,7 @@ export default function TTS() {
     const [isPlaying, setPlaying] = useState(null);
     const ref = useRef();
     const playAudio = () => {
-        debugger;
+        // debugger;
         // document.getElementById('main-container').style.filter = 'unset';
         if (!isPlaying) ref.current.play();
         else ref.current.pause();
